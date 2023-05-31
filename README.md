@@ -18,7 +18,10 @@ $ kubectl apply -f k8s/
 $ curl <argocd-api-server url>/app/<appName>
 
 # Get returns an applications by names
-$ curl -X GET <argocd-api-server url>/apps -H "Content-Type: application/json" -d '{"argocd-apps":[{"name":"<app1Name>"},{"name":"<app2Name>"}]}'
+$ curl -X GET \
+-H "Content-Type: application/json" \
+-d '{"argocd-apps":[{"name":"<app1Name>"},{"name":"<app2Name>"}]}' \
+<argocd-api-server url>/apps
 
 # Sync an application to its target state
 $ curl -X POST <argocd-api-server url>/app/<appName>/sync
