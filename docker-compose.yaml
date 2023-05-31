@@ -1,0 +1,13 @@
+---
+version: '3'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rayshoo/argocd-api-server:v1.0.0-alpha
+    ports:
+    - 3000:3000
+    env_file:
+    - .env

@@ -1,0 +1,35 @@
+{
+  "name": "argocd-api-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "bin": {
+    "app": "app.js"
+  },
+  "scripts": {
+    "start": "npx -y nodemon app",
+    "build": "pkg --output dist/server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayshoo/argocd-api-server.git"
+  },
+  "author": "rayshoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rayshoo/argocd-api-server/issues"
+  },
+  "homepage": "https://github.com/rayshoo/argocd-api-server#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  }
+}

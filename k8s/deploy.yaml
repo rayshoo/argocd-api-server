@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: argocd-api-server
+  name: argocd-api-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-api-server
+  template:
+    metadata:
+      labels:
+        app: argocd-api-server
+    spec:
+      containers:
+      - name: argocd-api-server
+        image: rayshoo/argocd-api-server:v1.0.0-alpha
+        imagePullPolicy: Always
+        env:
+        - name: TZ
+          value: Asia/Seoul
+        envFrom:
+        - secretRef:
+            name: argocd-api-server
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 3000
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
