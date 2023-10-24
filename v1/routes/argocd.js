@@ -57,16 +57,30 @@ router.get(['/app','/app/:name'], (req,res)=>{
     timeout
   })
   .then(resp=>{
+    let sources = [];
+    if (resp.spec.source) {
+      sources.push({
+        'path': resp.spec.source.path,
+        'targetRevision': resp.spec.source.targetRevision
+      })
+    }
+    if (resp.spec.sources) {
+      for (let i in resp.spec.sources) {
+        sources.push({
+          'path': resp.spec.sources[i].path,
+          'targetRevision': resp.spec.sources[i].targetRevision
+        })
+      }
+    }
     res.json({
-      'path': resp.spec.source.path,
-      'targetRevision': resp.spec.source.targetRevision,
+      sources,
       'syncRevision': resp.status.sync.revision,
       'status': resp.status.sync.status,
       'health': resp.status.health.status
     });
   })
   .catch(err=>{
-    console.error(logging(err.error));;
+    console.error(logging(err));;
     if (err.error != undefined && err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
       res.status(500).json({'error':`Connecting to ${protocol}://${argocdHost}:${argocdPort} failed.`});
     } else {
