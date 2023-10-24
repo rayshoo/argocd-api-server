@@ -28,7 +28,7 @@ let getAppsPath = async repo=>{
     })
     .catch(err=>{
       console.error(logging(err.error));;
-      if (err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
+      if (err.error != undefined && err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
         repo = JSON.parse(`{"error": "Connecting to ${protocol}://${argocdHost}:${argocdPort} failed."}`)
       } else {
         repo = JSON.parse(`{"error": "Failed to find '${repo['argocd-apps'][i]['name']}' app path."}`)
@@ -67,7 +67,7 @@ router.get(['/app','/app/:name'], (req,res)=>{
   })
   .catch(err=>{
     console.error(logging(err.error));;
-    if (err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
+    if (err.error != undefined && err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
       res.status(500).json({'error':`Connecting to ${protocol}://${argocdHost}:${argocdPort} failed.`});
     } else {
       res.status(500).json({'error':`${req.params.name} applications not found.`});
@@ -94,7 +94,7 @@ router.post('/app/:name/sync', (req,res)=>{
   })
   .catch(err=>{
     console.error(logging(err.error));;
-    if (err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
+    if (err.error != undefined && err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
       res.status(500).json({'error':`Connecting to ${protocol}://${argocdHost}:${argocdPort} failed`});
     } else {
       res.status(500).json({'error':`${req.params.name} app sync failed.`});

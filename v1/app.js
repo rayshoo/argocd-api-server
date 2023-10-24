@@ -65,7 +65,7 @@ let sessionCheck = async()=>{
     if (res.loggedIn) { result = res.loggedIn; } else { result = false; }
   })
   .catch(err=>{
-    if (err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
+    if (err.error != undefined && err.error.code != undefined && typeof err.error.code === "string" && err.error.code == 'ETIMEDOUT') {
       console.error(logging(`Connecting to ${protocol}://${argocdHost}:${argocdPort} failed.`));;
     } else {
       console.error(logging(err.error));;
