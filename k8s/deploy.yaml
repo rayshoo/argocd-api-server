@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: argocd-api-server
-        image: rayshoo/argocd-api-server:v1.0.0-alpha
+        image: rayshoo/argocd-api-server:v1.0.0-alpha-0
         imagePullPolicy: Always
         env:
         - name: TZ
